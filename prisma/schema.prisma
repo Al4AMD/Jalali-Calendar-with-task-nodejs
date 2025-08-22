@@ -32,7 +32,7 @@ model Task {
   id          Int       @id @default(autoincrement())
   title       String
   description String?   @db.Text
-  date        DateTime  // تاریخ شمسی به صورت میلادی ذخیره می‌شود
+  date        DateTime  // تاریخ جلالی به صورت میلادی ذخیره می‌شود
   startTime   String?   @map("start_time") // زمان شروع (HH:MM)
   endTime     String?   @map("end_time")   // زمان پایان (HH:MM)
   priority    Priority  @default(MEDIUM)

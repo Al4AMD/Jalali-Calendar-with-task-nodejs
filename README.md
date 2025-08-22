@@ -1,8 +1,8 @@
 <div align="center">
 
-# 🌙 تقویم شمسی - Persian Calendar
+# 🌙 تقویم جلالی - Persian Calendar
 
-### A Beautiful & Powerful Persian (Shamsi) Calendar Web Application
+### A Beautiful & Powerful Persian (Jalali) Calendar Web Application
 
 [![Made with Node.js](https://img.shields.io/badge/Made%20with-Node.js-339933?style=for-the-badge&logo=node.js&logoColor=white)](https://nodejs.org/)
 [![Built with Fastify](https://img.shields.io/badge/Built%20with-Fastify-000000?style=for-the-badge&logo=fastify&logoColor=white)](https://fastify.io/)
@@ -12,7 +12,7 @@
 
 <br/>
 
-*یک تقویم شمسی قدرتمند و زیبا ساخته شده با تکنولوژی‌های مدرن وب*
+*یک تقویم جلالی قدرتمند و زیبا ساخته شده با تکنولوژی‌های مدرن وب*
 
 [🎯 **Live Demo**](#) · [📚 **Documentation**](#-api-documentation) · [🐛 **Report Bug**](../../issues) · [✨ **Request Feature**](../../issues)
 
@@ -42,7 +42,7 @@
 - ⚡ **Fast Performance** | عملکرد بالا با Fastify
 - 🗄️ **Modern Database** | پایگاه داده مدرن با Prisma
 - 🔒 **JWT Security** | امنیت بالا با JWT
-- 📊 **Persian Calendar** | تقویم شمسی دقیق
+- 📊 **Persian Calendar** | تقویم جلالی دقیق
 - 🎨 **Beautiful UI** | رابط کاربری زیبا
 - 📱 **Mobile Friendly** | سازگار با موبایل
 - 🔧 **Easy Setup** | راه‌اندازی آسان
@@ -125,7 +125,7 @@ npm install
 cp .env.example .env
 
 # Edit .env file with your configuration
-DATABASE_URL="mysql://username:password@localhost:3306/shamsi_calendar"
+DATABASE_URL="mysql://username:password@localhost:3306/Jalali_calendar"
 JWT_SECRET="your-super-secret-jwt-key-here"
 PORT=3000
 NODE_ENV=development
@@ -134,7 +134,7 @@ NODE_ENV=development
 4️⃣ **Database setup | راه‌اندازی پایگاه داده**
 ```bash
 # Create database
-mysql -u root -p -e "CREATE DATABASE shamsi_calendar;"
+mysql -u root -p -e "CREATE DATABASE Jalali_calendar;"
 
 # Generate Prisma client
 npx prisma generate
@@ -329,7 +329,7 @@ git push origin feature/amazing-feature
 sudo systemctl status mysql
 
 # Verify credentials in .env
-DATABASE_URL="mysql://username:password@localhost:3306/shamsi_calendar"
+DATABASE_URL="mysql://username:password@localhost:3306/Jalali_calendar"
 
 # Test connection
 npx prisma db pull

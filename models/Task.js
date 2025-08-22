@@ -9,7 +9,7 @@ class Task {
   static async create(taskData) {
     const { title, description, date, startTime, endTime, priority, userId } = taskData;
     
-    // تبدیل تاریخ شمسی به میلادی
+    // تبدیل تاریخ جلالی به میلادی
     const gregorianDate = moment(date, 'jYYYY/jMM/jDD').toDate();
     
     return await prisma.task.create({
@@ -72,7 +72,7 @@ class Task {
 
   // دریافت تسک‌های یک روز خاص
   static async findByDate(date, userId) {
-    // تبدیل تاریخ شمسی به میلادی
+    // تبدیل تاریخ جلالی به میلادی
     const gregorianDate = moment(date, 'jYYYY/jMM/jDD');
     const startOfDay = gregorianDate.clone().startOf('day').toDate();
     const endOfDay = gregorianDate.clone().endOf('day').toDate();
@@ -236,7 +236,7 @@ class Task {
     };
   }
 
-  // تبدیل تاریخ میلادی به شمسی برای نمایش
+  // تبدیل تاریخ میلادی به جلالی برای نمایش
   static formatDateToPersian(date) {
     return moment(date).format('jYYYY/jMM/jDD');
   }

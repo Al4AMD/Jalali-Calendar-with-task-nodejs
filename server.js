@@ -42,7 +42,7 @@ async function start() {
     // Routes
     fastify.get('/', { preHandler: authenticateView }, async (request, reply) => {
       return reply.view('index.ejs', { 
-        title: 'تقویم شمسی',
+        title: 'تقویم جلالی',
         user: request.user
       });
     });

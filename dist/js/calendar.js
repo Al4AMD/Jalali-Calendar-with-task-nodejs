@@ -1,4 +1,4 @@
-// Calendar JavaScript - تقویم شمسی
+// Calendar JavaScript - تقویم جلالی
 let currentView = 'month';
 let currentDate;
 let selectedDate;

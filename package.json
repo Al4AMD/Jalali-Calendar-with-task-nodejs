@@ -1,7 +1,7 @@
 {
   "name": "simple-calendar",
   "version": "1.0.0",
-  "description": "A Simple Web Based Shamsi Calendar Built Using Node.js, Prisma, HTML & CSS",
+  "description": "A Simple Web Based Jalali Calendar Built Using Node.js, Prisma, HTML & CSS",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
@@ -17,7 +17,7 @@
   },
   "keywords": [
     "Calendar",
-    "Shamsi",
+    "Jalali",
     "Node.js",
     "CSS",
     "HTML",
