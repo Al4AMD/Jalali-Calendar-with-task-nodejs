@@ -1,0 +1,27 @@
+{
+  "name": "simple-calendar",
+  "version": "1.0.0",
+  "description": "A Simple Web Based Shamsi Calendar Built Using Node.js, Prisma, HTML & CSS",
+  "main": "server.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Al4AMD/Shamsi-Calendar.git"
+  },
+  "keywords": [
+    "Calendar",
+    "Shamsi",
+    "Node.js",
+    "CSS",
+    "HTML",
+    "Prisma"
+  ],
+  "author": "AliAkbar Alimohammadi",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Al4AMD/Shamsi-Calendar/issues"
+  },
+  "homepage": "https://github.com/Al4AMD/Shamsi-Calendar#readme"
+}
