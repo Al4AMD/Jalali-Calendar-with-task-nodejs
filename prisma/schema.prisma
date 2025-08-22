@@ -1,0 +1,55 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+// مدل کاربران
+model User {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  username  String   @unique
+  password  String
+  firstName String?  @map("first_name")
+  lastName  String?  @map("last_name")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+ 
+  // روابط
+  tasks Task[]
+
+  @@map("users")
+}
+
+// مدل تسک‌ها
+model Task {
+  id          Int       @id @default(autoincrement())
+  title       String
+  description String?   @db.Text
+  date        DateTime  // تاریخ شمسی به صورت میلادی ذخیره می‌شود
+  startTime   String?   @map("start_time") // زمان شروع (HH:MM)
+  endTime     String?   @map("end_time")   // زمان پایان (HH:MM)
+  priority    Priority  @default(MEDIUM)
+  isCompleted Boolean   @default(false) @map("is_completed")
+  createdAt   DateTime  @default(now()) @map("created_at")
+  updatedAt   DateTime  @updatedAt @map("updated_at")
+
+  // روابط
+  userId Int  @map("user_id")
+  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("tasks")
+}
+
+// انواع اولویت
+enum Priority {
+  LOW    // کم - سبز
+  MEDIUM // متوسط - زرد
+  HIGH   // زیاد - قرمز
+}

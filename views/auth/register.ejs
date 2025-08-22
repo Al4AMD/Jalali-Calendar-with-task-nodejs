@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %> - تقویم شمسی</title>
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="/static/css/main.css">
+    <script src="/static/js/fontawsome-all.js" defer></script>
+    
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+    <div class="auth-container">
+        <div class="auth-card">
+            <div class="auth-header">
+                <h1 class="auth-title">
+                    <i class="fas fa-user-plus"></i>
+                    ثبت نام در تقویم شمسی
+                </h1>
+                <p class="auth-subtitle">برای شروع، حساب کاربری جدید ایجاد کنید</p>
+            </div>
+            
+            <form id="registerForm" class="auth-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="firstName" class="form-label">
+                            <i class="fas fa-user"></i>
+                            نام
+                        </label>
+                        <input 
+                            type="text" 
+                            id="firstName" 
+                            name="firstName" 
+                            class="form-input"
+                            placeholder="نام خود را وارد کنید"
+                        >
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="lastName" class="form-label">
+                            <i class="fas fa-user"></i>
+                            نام خانوادگی
+                        </label>
+                        <input 
+                            type="text" 
+                            id="lastName" 
+                            name="lastName" 
+                            class="form-input"
+                            placeholder="نام خانوادگی خود را وارد کنید"
+                        >
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="username" class="form-label">
+                        <i class="fas fa-at"></i>
+                        نام کاربری
+                    </label>
+                    <input 
+                        type="text" 
+                        id="username" 
+                        name="username" 
+                        class="form-input"
+                        placeholder="نام کاربری منحصر به فرد انتخاب کنید"
+                        required
+                    >
+                </div>
+                
+                <div class="form-group">
+                    <label for="email" class="form-label">
+                        <i class="fas fa-envelope"></i>
+                        ایمیل
+                    </label>
+                    <input 
+                        type="email" 
+                        id="email" 
+                        name="email" 
+                        class="form-input"
+                        placeholder="آدرس ایمیل خود را وارد کنید"
+                        required
+                    >
+                </div>
+                
+                <div class="form-group">
+                    <label for="password" class="form-label">
+                        <i class="fas fa-lock"></i>
+                        رمز عبور
+                    </label>
+                    <div class="password-field">
+                        <input 
+                            type="password" 
+                            id="password" 
+                            name="password" 
+                            class="form-input"
+                            placeholder="حداقل ۶ کاراکتر"
+                            required
+                            minlength="6"
+                        >
+                        <button type="button" class="password-toggle" onclick="togglePassword('password', 'passwordToggleIcon')">
+                            <i class="fas fa-eye" id="passwordToggleIcon"></i>
+                        </button>
+                    </div>
+                    <div class="password-strength" id="passwordStrength"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="confirmPassword" class="form-label">
+                        <i class="fas fa-lock"></i>
+                        تکرار رمز عبور
+                    </label>
+                    <div class="password-field">
+                        <input 
+                            type="password" 
+                            id="confirmPassword" 
+                            name="confirmPassword" 
+                            class="form-input"
+                            placeholder="رمز عبور را دوباره وارد کنید"
+                            required
+                        >
+                        <button type="button" class="password-toggle" onclick="togglePassword('confirmPassword', 'confirmPasswordToggleIcon')">
+                            <i class="fas fa-eye" id="confirmPasswordToggleIcon"></i>
+                        </button>
+                    </div>
+                    <div class="password-match" id="passwordMatch"></div>
+                </div>
+                
+                <button type="submit" class="btn btn-primary auth-btn">
+                    <i class="fas fa-user-plus"></i>
+                    ثبت نام
+                </button>
+            </form>
+            
+            <div class="auth-footer">
+                <p>قبلا ثبت نام کرده‌اید؟ <a href="/login" class="auth-link">وارد شوید</a></p>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .auth-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--primary-500) 0%, var(--primary-700) 100%);
+            padding: 2rem;
+        }
+
+        .auth-card {
+            background: var(--bg-card);
+            border-radius: 20px;
+            box-shadow: var(--shadow-lg);
+            padding: 3rem;
+            width: 100%;
+            max-width: 500px;
+            border: 1px solid var(--border-color);
+        }
+
+        .auth-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .auth-title {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+        }
+
+        .auth-title i {
+            color: var(--primary-600);
+        }
+
+        .auth-subtitle {
+            color: var(--text-secondary);
+            font-size: 1rem;
+        }
+
+        .auth-form {
+            margin-bottom: 2rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .form-label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 600;
+        }
+
+        .form-label i {
+            color: var(--primary-600);
+            width: 16px;
+        }
+
+        .password-field {
+            position: relative;
+        }
+
+        .password-toggle {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 4px;
+            transition: color 0.2s ease;
+        }
+
+        .password-toggle:hover {
+            color: var(--primary-600);
+        }
+
+        .password-field .form-input {
+            padding-left: 3rem;
+        }
+
+        .password-strength {
+            margin-top: 0.5rem;
+            font-size: 0.875rem;
+            display: none;
+        }
+
+        .password-strength.weak {
+            color: var(--danger-600);
+            display: block;
+        }
+
+        .password-strength.medium {
+            color: var(--warning-600);
+            display: block;
+        }
+
+        .password-strength.strong {
+            color: var(--success-600);
+            display: block;
+        }
+
+        .password-match {
+            margin-top: 0.5rem;
+            font-size: 0.875rem;
+            display: none;
+        }
+
+        .password-match.match {
+            color: var(--success-600);
+            display: block;
+        }
+
+        .password-match.no-match {
+            color: var(--danger-600);
+            display: block;
+        }
+
+        .auth-btn {
+            width: 100%;
+            padding: 1rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-top: 1rem;
+        }
+
+        .auth-footer {
+            text-align: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .auth-link {
+            color: var(--primary-600);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .auth-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Loading state */
+        .loading {
+            opacity: 0.7;
+            pointer-events: none;
+        }
+
+        .loading .auth-btn {
+            position: relative;
+        }
+
+        .loading .auth-btn::after {
+            content: "";
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            top: 50%;
+            left: 50%;
+            margin-left: -10px;
+            margin-top: -10px;
+            border: 2px solid transparent;
+            border-top-color: #ffffff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Dark mode adjustments */
+        [data-theme="dark"] .auth-container {
+            background: linear-gradient(135deg, var(--gray-800) 0%, var(--gray-900) 100%);
+        }
+
+        /* Responsive */
+        @media (max-width: 580px) {
+            .auth-container {
+                padding: 1rem;
+            }
+            
+            .auth-card {
+                padding: 2rem;
+            }
+            
+            .auth-title {
+                font-size: 1.5rem;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+
+    <script>
+        // Toggle password visibility
+        function togglePassword(inputId, iconId) {
+            const passwordInput = document.getElementById(inputId);
+            const toggleIcon = document.getElementById(iconId);
+            
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                toggleIcon.className = 'fas fa-eye-slash';
+            } else {
+                passwordInput.type = 'password';
+                toggleIcon.className = 'fas fa-eye';
+            }
+        }
+
+        // Password strength checker
+        function checkPasswordStrength(password) {
+            const strengthDiv = document.getElementById('passwordStrength');
+            
+            if (password.length === 0) {
+                strengthDiv.className = 'password-strength';
+                strengthDiv.textContent = '';
+                return;
+            }
+            
+            let score = 0;
+            
+            // Length check
+            if (password.length >= 8) score++;
+            if (password.length >= 12) score++;
+            
+            // Complexity checks
+            if (/[a-z]/.test(password)) score++;
+            if (/[A-Z]/.test(password)) score++;
+            if (/[0-9]/.test(password)) score++;
+            if (/[^A-Za-z0-9]/.test(password)) score++;
+            
+            if (score < 3) {
+                strengthDiv.className = 'password-strength weak';
+                strengthDiv.textContent = 'ضعیف';
+            } else if (score < 5) {
+                strengthDiv.className = 'password-strength medium';
+                strengthDiv.textContent = 'متوسط';
+            } else {
+                strengthDiv.className = 'password-strength strong';
+                strengthDiv.textContent = 'قوی';
+            }
+        }
+
+        // Password match checker
+        function checkPasswordMatch() {
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            const matchDiv = document.getElementById('passwordMatch');
+            
+            if (confirmPassword.length === 0) {
+                matchDiv.className = 'password-match';
+                matchDiv.textContent = '';
+                return;
+            }
+            
+            if (password === confirmPassword) {
+                matchDiv.className = 'password-match match';
+                matchDiv.textContent = 'رمزهای عبور یکسان هستند ✓';
+            } else {
+                matchDiv.className = 'password-match no-match';
+                matchDiv.textContent = 'رمزهای عبور یکسان نیستند ✗';
+            }
+        }
+
+        // Event listeners
+        document.getElementById('password').addEventListener('input', function() {
+            checkPasswordStrength(this.value);
+            checkPasswordMatch();
+        });
+
+        document.getElementById('confirmPassword').addEventListener('input', checkPasswordMatch);
+
+        // Register form handler
+        document.getElementById('registerForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const data = {
+                firstName: formData.get('firstName'),
+                lastName: formData.get('lastName'),
+                username: formData.get('username'),
+                email: formData.get('email'),
+                password: formData.get('password'),
+                confirmPassword: formData.get('confirmPassword')
+            };
+
+            // Client-side validation
+            if (data.password !== data.confirmPassword) {
+                await Swal.fire({
+                    icon: 'error',
+                    title: 'خطا!',
+                    text: 'رمزهای عبور یکسان نیستند',
+                    confirmButtonText: 'باشه'
+                });
+                return;
+            }
+
+            // Add loading state
+            document.body.classList.add('loading');
+            
+            try {
+                const response = await fetch('/api/auth/register', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    await Swal.fire({
+                        icon: 'success',
+                        title: 'موفق!',
+                        text: result.message,
+                        confirmButtonText: 'باشه',
+                        timer: 2000,
+                        timerProgressBar: true
+                    });
+                    
+                    window.location.href = '/';
+                } else {
+                    await Swal.fire({
+                        icon: 'error',
+                        title: 'خطا!',
+                        text: result.message,
+                        confirmButtonText: 'باشه'
+                    });
+                }
+            } catch (error) {
+                await Swal.fire({
+                    icon: 'error',
+                    title: 'خطا!',
+                    text: 'خطای شبکه. لطفا دوباره تلاش کنید.',
+                    confirmButtonText: 'باشه'
+                });
+            } finally {
+                // Remove loading state
+                document.body.classList.remove('loading');
+            }
+        });
+
+        // Auto-focus first input
+        document.getElementById('firstName').focus();
+    </script>
+</body>
+</html>
